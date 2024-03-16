@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   sizer: ^2.0.15
   country_picker: ^2.0.25
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

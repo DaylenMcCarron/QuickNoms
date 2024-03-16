@@ -2,6 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
@@ -34,6 +35,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
               height: 3.h,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                   onTap: () {
@@ -50,11 +52,11 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                     );
                   },
                   child: Container(
-                    height: 6.h,
+                    height: 5.5.h,
                     width: 25.w,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.sp),
+                        borderRadius: BorderRadius.circular(4.sp),
                         color: greyShade3),
                     child: Text(
                       selectedCountry,
@@ -63,14 +65,36 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 70.w,
+                  width: 65.w,
                   child: TextField(
                     controller: mobileController,
                     cursorColor: black,
                     style: AppTextStyles.textFieldHintTextStyle,
                     keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 2.w),
+                        hintText: 'Mobile number',
+                        hintStyle: AppTextStyles.textFieldHintTextStyle,
+                        filled: true,
+                        fillColor: greyShade3,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: black),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide(color: grey))),
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
@@ -109,6 +133,9 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                 color: grey,
               ),
             ),
+            SizedBox(
+              height: 2.h,
+            ),
             Row(
               children: [
                 Expanded(
@@ -123,11 +150,42 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                   ),
                 ),
                 Expanded(
-                    child: Divider(
-                  color: grey,
-                ))
+                  child: Divider(
+                    color: grey,
+                  ),
+                ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: white,
+                  minimumSize: Size(90.w, 6.h),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.zero))),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Continue with google',
+                      style: AppTextStyles.body16,
+                    ),
+                  ),
+                  Positioned(
+                    left: 2.w,
+                    child: FaIcon(
+                      FontAwesomeIcons.google,
+                      color: black,
+                      size: 3.h,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
