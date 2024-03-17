@@ -53,11 +53,13 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                   },
                   child: Container(
                     height: 5.5.h,
-                    width: 25.w,
+                    width: 20.w,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.sp),
-                        color: greyShade3),
+                      borderRadius: BorderRadius.circular(4.sp),
+                      //color: greyShade3,
+                      border: Border.all(color: grey),
+                    ),
                     child: Text(
                       selectedCountry,
                       style: AppTextStyles.body14,
@@ -65,7 +67,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 65.w,
+                  width: 72.w,
                   child: TextField(
                     controller: mobileController,
                     cursorColor: black,
@@ -76,8 +78,8 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                             EdgeInsets.symmetric(vertical: 0, horizontal: 2.w),
                         hintText: 'Mobile number',
                         hintStyle: AppTextStyles.textFieldHintTextStyle,
-                        filled: true,
-                        fillColor: greyShade3,
+                        // filled: true,
+                        // fillColor: greyShade3,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide(color: grey),

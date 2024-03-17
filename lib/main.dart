@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quicknoms/view/authScreens/mobileLoginScreen.dart';
+import 'package:quicknoms/view/authScreens/otpScreen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          home: MobileLoginScreen());
+          home: OTPScreen());
     });
   }
 }
