@@ -1,15 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:quicknoms/view/authScreens/mobileLoginScreen.dart';
-import 'package:quicknoms/view/authScreens/otpScreen.dart';
+import 'package:quicknoms/firebase_options.dart';
 import 'package:quicknoms/view/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const QuickNoms());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class QuickNoms extends StatelessWidget {
+  const QuickNoms({super.key});
 
   // This widget is the root of your application.
   @override
