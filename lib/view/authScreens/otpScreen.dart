@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
+import 'package:quicknoms/controller/provider/authProvider/authProvider.dart';
+import 'package:quicknoms/controller/services/authServices/mobileAuthServices.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
@@ -68,7 +71,10 @@ class _OTPScreenState extends State<OTPScreen> {
               right: 0.w,
               bottom: 3.h,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  MobileAuthServices.verifyOTP(
+                      context: context, otp: otpController.text.trim());
+                },
                 style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(2.h),
                     backgroundColor: white,
@@ -91,10 +97,10 @@ class _OTPScreenState extends State<OTPScreen> {
         padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
         children: [
           SizedBox(
-            height: 2.h,
+            height: 4.h,
           ),
           Text(
-            'Enter the 4-digit code sent to you at 05599224612',
+            'Enter the 4-digit code sent to you at ${context.read<MobileAuthProvider>().mobileNumber}',
             style: AppTextStyles.body16,
           ),
           SizedBox(
@@ -102,7 +108,7 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
           PinCodeTextField(
             appContext: context,
-            length: 4,
+            length: 6,
             obscureText: false,
             animationType: AnimationType.fade,
             pinTheme: PinTheme(

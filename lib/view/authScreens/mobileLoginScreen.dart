@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:quicknoms/controller/provider/authProvider/authProvider.dart';
+import 'package:quicknoms/controller/services/authServices/mobileAuthServices.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +20,18 @@ class MobileLoginScreen extends StatefulWidget {
 class _MobileLoginScreenState extends State<MobileLoginScreen> {
   String selectedCountry = '+91';
   TextEditingController mobileController = TextEditingController();
+  bool recieveOTPButtonPressed = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        recieveOTPButtonPressed = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -103,29 +118,44 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
               height: 3.h,
             ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    recieveOTPButtonPressed = true;
+                  });
+                  context.read<MobileAuthProvider>().updateMobileNumber(
+                      '$selectedCountry${mobileController.text.trim()}');
+                  MobileAuthServices.recieveOTP(
+                      context: context,
+                      mobileNo:
+                          '$selectedCountry${mobileController.text.trim()}');
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: black,
                     minimumSize: Size(90.w, 6.h),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.zero))),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text('Next',
-                          style: AppTextStyles.body16.copyWith(color: white)),
-                    ),
-                    Positioned(
-                      right: 2.w,
-                      child: Icon(
-                        Icons.arrow_forward,
+                child: recieveOTPButtonPressed
+                    ? CircularProgressIndicator(
                         color: white,
-                        size: 4.h,
-                      ),
-                    )
-                  ],
-                )),
+                      )
+                    : Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text('Next',
+                                style: AppTextStyles.body16
+                                    .copyWith(color: white)),
+                          ),
+                          Positioned(
+                            right: 2.w,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: white,
+                              size: 4.h,
+                            ),
+                          )
+                        ],
+                      )),
             SizedBox(
               height: 3.h,
             ),
