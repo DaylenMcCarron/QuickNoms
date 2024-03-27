@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:quicknoms/controller/provider/restaurantProvider/restaurantProvider.dart';
+import 'package:quicknoms/model/restaurantModel.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
@@ -129,20 +132,47 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 2.h,
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 20.h,
-                    width: 94.w,
-                    margin: EdgeInsets.symmetric(vertical: 1.h),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.sp),
-                        color: greyShade3),
-                  );
-                })
+            Consumer<RestaurantProvider>(
+                builder: (context, RestaurantProvider, child) {
+              if (RestaurantProvider.restaurants.isEmpty) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 20.h,
+                        width: 94.w,
+                        margin: EdgeInsets.symmetric(vertical: 1.h),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.sp),
+                            color: greyShade3),
+                      );
+                    });
+              } else {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: RestaurantProvider.restaurants.length,
+                    itemBuilder: (context, index) {
+                      RestaurantModel restaurant =
+                          RestaurantProvider.restaurants[index];
+                      return Container(
+                        height: 20.h,
+                        width: 94.w,
+                        margin: EdgeInsets.symmetric(vertical: 1.h),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.sp),
+                            // image: DecorationImage(
+                            //   image: NetworkImage(
+                            //     restaurant.bannerImages![0],
+                            //   ),
+                            // ),
+                            color: greyShade3),
+                      );
+                    });
+              }
+            }),
           ],
         ),
       ),

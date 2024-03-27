@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:quicknoms/controller/services/fetchRestaurantServices/fetchRestaurantServices.dart';
 import 'package:quicknoms/view/account/account.dart';
 import 'package:quicknoms/view/basket/basketScreen.dart';
 import 'package:quicknoms/view/browse/browse.dart';
@@ -17,6 +18,14 @@ class BottomNavigationBarQuickNoms extends StatefulWidget {
 
 class _BottomNavigationBarQuickNomsState
     extends State<BottomNavigationBarQuickNoms> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      RestaurantServices.getNearbyRestaurants(context);
+    });
+  }
+
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
   @override

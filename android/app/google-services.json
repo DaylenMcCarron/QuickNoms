@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1004979445134",
+    "firebase_url": "https://quicknoms-1b088-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "quicknoms-1b088",
     "storage_bucket": "quicknoms-1b088.appspot.com"
   },
@@ -10,6 +11,25 @@
         "mobilesdk_app_id": "1:1004979445134:android:c2c2c6564732d4e6a7d8df",
         "android_client_info": {
           "package_name": "com.example.quicknoms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQTcPHQ9KB7XhJlJ18p8Voo15l04rJrNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004979445134:android:f18fa8c846313090a7d8df",
+        "android_client_info": {
+          "package_name": "com.example.quicknomsrestaurant"
         }
       },
       "oauth_client": [],

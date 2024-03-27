@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:1004979445134:android:c2c2c6564732d4e6a7d8df',
     messagingSenderId: '1004979445134',
     projectId: 'quicknoms-1b088',
+    databaseURL: 'https://quicknoms-1b088-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'quicknoms-1b088.appspot.com',
   );
 
@@ -62,6 +63,7 @@ class DefaultFirebaseOptions {
     appId: '1:1004979445134:ios:2548b5ecb3bc1798a7d8df',
     messagingSenderId: '1004979445134',
     projectId: 'quicknoms-1b088',
+    databaseURL: 'https://quicknoms-1b088-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'quicknoms-1b088.appspot.com',
     iosBundleId: 'com.example.quicknoms',
   );
