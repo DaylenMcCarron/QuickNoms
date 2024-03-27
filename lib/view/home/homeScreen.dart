@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -22,6 +25,25 @@ class _HomeScreenState extends State<HomeScreen> {
     ['assets/categories/carrebian.png', 'Carrebian'],
     ['assets/categories/chinese.png', 'Chinese'],
   ];
+
+  BannerImages(RestaurantModel restaurant) {
+    List<String> bannerImages = [];
+    if (restaurant.bannerImage1 != null) {
+      bannerImages.add(restaurant.bannerImage1!);
+    }
+    if (restaurant.bannerImage2 != null) {
+      bannerImages.add(restaurant.bannerImage2!);
+    }
+    if (restaurant.bannerImage3 != null) {
+      bannerImages.add(restaurant.bannerImage3!);
+    }
+    if (restaurant.bannerImage4 != null) {
+      bannerImages.add(restaurant.bannerImage4!);
+    }
+    log(bannerImages.toString());
+    return bannerImages;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -155,20 +177,66 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: RestaurantProvider.restaurants.length,
                     itemBuilder: (context, index) {
+                      CarouselController controller = CarouselController();
                       RestaurantModel restaurant =
                           RestaurantProvider.restaurants[index];
+                      List<String> bannerImages = BannerImages(restaurant);
                       return Container(
-                        height: 20.h,
-                        width: 94.w,
-                        margin: EdgeInsets.symmetric(vertical: 1.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 3.w, vertical: 2.h),
+                        margin: EdgeInsets.symmetric(
+                          vertical: 1.5.h,
+                        ),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.sp),
-                            // image: DecorationImage(
-                            //   image: NetworkImage(
-                            //     restaurant.bannerImages![0],
-                            //   ),
-                            // ),
-                            color: greyShade3),
+                          borderRadius: BorderRadius.circular(
+                            5.sp,
+                          ),
+                          border: Border.all(
+                            color: black87,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 23.h,
+                              width: 94.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    5.sp,
+                                  ),
+                                  border: Border.all(color: greyShade3)),
+                              child: CarouselSlider(
+                                carouselController: controller,
+                                options: CarouselOptions(
+                                  height: 23.h,
+                                  autoPlay: true,
+                                  viewportFraction: 1,
+                                ),
+                                items: bannerImages
+                                    .map(
+                                      (image) => Container(
+                                        width: 94.w,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(image),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            Text(
+                              restaurant.restaurantName!,
+                              style: AppTextStyles.body16Bold,
+                            )
+                          ],
+                        ),
                       );
                     });
               }

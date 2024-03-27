@@ -7,14 +7,20 @@ class RestaurantModel {
   String? restaurantName;
   String? restaurantLicenseNumber;
   String? restaurantUID;
-  List<String>? bannerImages;
+  String? bannerImage1;
+  String? bannerImage2;
+  String? bannerImage3;
+  String? bannerImage4;
   AddressModel? address;
   String? cloudMessagingToken;
   RestaurantModel({
     this.restaurantName,
     this.restaurantLicenseNumber,
     this.restaurantUID,
-    this.bannerImages,
+    this.bannerImage1,
+    this.bannerImage2,
+    this.bannerImage3,
+    this.bannerImage4,
     this.address,
     this.cloudMessagingToken,
   });
@@ -24,7 +30,10 @@ class RestaurantModel {
       'restaurantName': restaurantName,
       'restaurantLicenseNumber': restaurantLicenseNumber,
       'restaurantUID': restaurantUID,
-      'bannerImages': bannerImages,
+      'bannerImage1': bannerImage1,
+      'bannerImage2': bannerImage2,
+      'bannerImage3': bannerImage3,
+      'bannerImage4': bannerImage4,
       'address': address?.toMap(),
       'cloudMessagingToken': cloudMessagingToken,
     };
@@ -40,10 +49,14 @@ class RestaurantModel {
           : null,
       restaurantUID:
           map['restaurantUID'] != null ? map['restaurantUID'] as String : null,
-      bannerImages: map['bannerImages'] != null
-          ? List<String>.from(
-              (map['bannerImages'] as List<dynamic>).cast<String>())
-          : null,
+      bannerImage1:
+          map['bannerImage1'] != null ? map['bannerImage1'] as String : null,
+      bannerImage2:
+          map['bannerImage2'] != null ? map['bannerImage2'] as String : null,
+      bannerImage3:
+          map['bannerImage3'] != null ? map['bannerImage3'] as String : null,
+      bannerImage4:
+          map['bannerImage4'] != null ? map['bannerImage4'] as String : null,
       address: map['address'] != null
           ? AddressModel.fromMap(map['address'] as Map<String, dynamic>)
           : null,

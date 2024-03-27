@@ -11,7 +11,7 @@ class RestaurantProvider extends ChangeNotifier {
 
   addRestaurants(String restaurantID) async {
     RestaurantModel data =
-        await RestaurantServices.fetchRestrauntData(restaurantID);
+        await RestaurantServices.fetchRestaurantData(restaurantID);
     restaurants.add(data);
     notifyListeners();
     log("Total Restaurant fetched are: ");

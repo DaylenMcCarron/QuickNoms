@@ -50,10 +50,11 @@ class RestaurantServices {
     });
   }
 
-  static fetchRestrauntData(String restaurantID) async {
+  static fetchRestaurantData(String restaurantID) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
           await firestore.collection('Restaurant').doc(restaurantID).get();
+
       RestaurantModel data = RestaurantModel.fromMap(snapshot.data()!);
       return data;
     } catch (e) {
