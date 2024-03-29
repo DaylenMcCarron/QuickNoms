@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:quicknoms/view/authScreens/mobileLoginScreen.dart';
 import 'package:quicknoms/view/authScreens/otpScreen.dart';
 import 'package:quicknoms/view/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:quicknoms/view/signInLogicScreen/signInLogicScreen.dart';
+import 'package:quicknoms/view/userRegistrationScreen/userRegistrationScreen.dart';
 
 class MobileAuthServices {
   static bool checkAuthentication(BuildContext context) {
@@ -35,10 +36,10 @@ class MobileAuthServices {
       await auth.verifyPhoneNumber(
           phoneNumber: mobileNo,
           verificationCompleted: (PhoneAuthCredential credentials) {
-            log(credentials as num);
+            log(credentials as String);
           },
           verificationFailed: (FirebaseAuthException exception) {
-            log(exception as num);
+            log(exception.toString());
             throw Exception(exception);
           },
           codeSent: (String verificationID, int? resendToken) {
@@ -53,7 +54,7 @@ class MobileAuthServices {
           },
           codeAutoRetrievalTimeout: (String verificationID) {});
     } catch (e) {
-      log(e.toString() as num);
+      log(e.toString());
       throw Exception(e);
     }
   }
@@ -71,7 +72,42 @@ class MobileAuthServices {
               child: const SignInLogicScreen(),
               type: PageTransitionType.rightToLeft));
     } catch (e) {
-      log(e.toString() as num);
+      log(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  static checkUserRegistration({required BuildContext context}) async {
+    bool userIsRegistered = false;
+    try {
+      await firestore
+          .collection('User')
+          .where('userID', isEqualTo: auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        value.size > 0 ? userIsRegistered = true : userIsRegistered = false;
+        log('User is Registered = $userIsRegistered');
+        if (userIsRegistered) {
+          //PushNotificationServices.initializeFCM();
+          Navigator.pushAndRemoveUntil(
+            context,
+            PageTransition(
+                child: const BottomNavigationBarQuickNoms(),
+                type: PageTransitionType.rightToLeft),
+            (route) => false,
+          );
+        } else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            PageTransition(
+                child: const UserRegistraionScreen(),
+                type: PageTransitionType.rightToLeft),
+            (route) => false,
+          );
+        }
+      });
+    } catch (e) {
+      log(e.toString());
       throw Exception(e);
     }
   }
