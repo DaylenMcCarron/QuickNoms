@@ -4,14 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
 
-class BrowseScreen extends StatefulWidget {
-  const BrowseScreen({super.key});
+class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({super.key});
 
   @override
-  State<BrowseScreen> createState() => _BrowseScreenState();
+  State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-class _BrowseScreenState extends State<BrowseScreen> {
+class _CategoryScreenState extends State<CategoryScreen> {
   List categories = [
     ['assets/categories/alcohol.png', 'Alcohol'],
     ['assets/categories/american.png', 'American'],

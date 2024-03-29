@@ -10,7 +10,8 @@ class FoodModel {
   String description;
   String foodImageURL;
   bool isVegetarian;
-  String price;
+  String actualPrice;
+  String discountedPrice;
   FoodModel({
     required this.name,
     required this.restaurantUID,
@@ -19,7 +20,8 @@ class FoodModel {
     required this.description,
     required this.foodImageURL,
     required this.isVegetarian,
-    required this.price,
+    required this.actualPrice,
+    required this.discountedPrice,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,7 +33,8 @@ class FoodModel {
       "description": description,
       "foodImageURL": foodImageURL,
       "isVegetarian": isVegetarian,
-      "price": price,
+      "actualPrice": actualPrice,
+      "discountedPrice": discountedPrice,
     };
   }
 
@@ -44,7 +47,8 @@ class FoodModel {
       description: map['description'] as String,
       foodImageURL: map['foodImageURL'] as String,
       isVegetarian: map['isVegetarian'] as bool,
-      price: map['price'] as String,
+      actualPrice: map['actualPrice'] as String,
+      discountedPrice: map['discountedPrice'] as String,
     );
   }
   String toJson() => json.encode(toMap());

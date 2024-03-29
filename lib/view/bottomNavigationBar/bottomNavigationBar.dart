@@ -4,9 +4,9 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:quicknoms/controller/services/fetchRestaurantServices/fetchRestaurantServices.dart';
 import 'package:quicknoms/view/account/account.dart';
 import 'package:quicknoms/view/basket/basketScreen.dart';
-import 'package:quicknoms/view/browse/browse.dart';
+import 'package:quicknoms/view/browseScreen/browseScreen.dart';
+import 'package:quicknoms/view/categoryScreen/categoryScreen.dart';
 import 'package:quicknoms/view/home/homeScreen.dart';
-import 'package:quicknoms/view/grocery/groceryScreen.dart';
 
 class BottomNavigationBarQuickNoms extends StatefulWidget {
   const BottomNavigationBarQuickNoms({super.key});
@@ -41,17 +41,17 @@ class _BottomNavigationBarQuickNomsState
           ),
         ),
         PersistentTabConfig(
-          screen: const BrowseScreen(),
+          screen: const CategoryScreen(),
           item: ItemConfig(
             icon: const Icon(Icons.calendar_view_month_sharp),
-            title: "Browse",
+            title: "Category",
           ),
         ),
         PersistentTabConfig(
-          screen: const GroceryScreen(),
+          screen: const BrowseScreen(),
           item: ItemConfig(
-            icon: const Icon(Icons.shopping_bag),
-            title: "Grocery",
+            icon: const Icon(Icons.search),
+            title: "Browse",
           ),
         ),
         PersistentTabConfig(

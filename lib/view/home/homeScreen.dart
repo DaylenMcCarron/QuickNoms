@@ -4,11 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:quicknoms/controller/provider/restaurantProvider/restaurantProvider.dart';
 import 'package:quicknoms/model/restaurantModel.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
+import 'package:quicknoms/view/particularRestaurantMenuScreen/particularRestaurantMenuScreen.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -181,61 +183,75 @@ class _HomeScreenState extends State<HomeScreen> {
                       RestaurantModel restaurant =
                           RestaurantProvider.restaurants[index];
                       List<String> bannerImages = BannerImages(restaurant);
-                      return Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 2.h),
-                        margin: EdgeInsets.symmetric(
-                          vertical: 1.5.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            5.sp,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              child: ParticularRestaurantScreen(
+                                restaurantUID: restaurant.restaurantUID!,
+                                restaurantName: restaurant.restaurantName!,
+                              ),
+                              type: PageTransitionType.rightToLeft,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 3.w, vertical: 2.h),
+                          margin: EdgeInsets.symmetric(
+                            vertical: 1.5.h,
                           ),
-                          border: Border.all(
-                            color: black87,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              5.sp,
+                            ),
+                            border: Border.all(
+                              color: black87,
+                            ),
                           ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 23.h,
-                              width: 94.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    5.sp,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 23.h,
+                                width: 94.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      5.sp,
+                                    ),
+                                    border: Border.all(color: greyShade3)),
+                                child: CarouselSlider(
+                                  carouselController: controller,
+                                  options: CarouselOptions(
+                                    height: 23.h,
+                                    autoPlay: true,
+                                    viewportFraction: 1,
                                   ),
-                                  border: Border.all(color: greyShade3)),
-                              child: CarouselSlider(
-                                carouselController: controller,
-                                options: CarouselOptions(
-                                  height: 23.h,
-                                  autoPlay: true,
-                                  viewportFraction: 1,
-                                ),
-                                items: bannerImages
-                                    .map(
-                                      (image) => Container(
-                                        width: 94.w,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(image),
-                                            fit: BoxFit.cover,
+                                  items: bannerImages
+                                      .map(
+                                        (image) => Container(
+                                          width: 94.w,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(image),
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    )
-                                    .toList(),
+                                      )
+                                      .toList(),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Text(
-                              restaurant.restaurantName!,
-                              style: AppTextStyles.body16Bold,
-                            )
-                          ],
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Text(
+                                restaurant.restaurantName!,
+                                style: AppTextStyles.body16Bold,
+                              )
+                            ],
+                          ),
                         ),
                       );
                     });
