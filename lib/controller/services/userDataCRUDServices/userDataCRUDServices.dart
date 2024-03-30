@@ -100,21 +100,21 @@ class UserDataCRUDServices {
     return addresses[0];
   }
 
-  // static setAddressAsActive(UserAddressModel data, BuildContext context) async {
-  //   List<UserAddressModel> addresses =
-  //       context.read<ProfileProvider>().addresses;
+  static setAddressAsActive(UserAddressModel data, BuildContext context) async {
+    List<UserAddressModel> addresses =
+        context.read<ProfileProvider>().addresses;
 
-  //   for (var addressData in addresses) {
-  //     if (addressData.addressID != data.addressID) {
-  //       await firestore
-  //           .collection('Address')
-  //           .doc(addressData.addressID)
-  //           .update({'isActive': false});
-  //     }
-  //   }
-  //   await firestore
-  //       .collection('Address')
-  //       .doc(data.addressID)
-  //       .update({'isActive': true});
-  // }
+    for (var addressData in addresses) {
+      if (addressData.addressID != data.addressID) {
+        await firestore
+            .collection('Address')
+            .doc(addressData.addressID)
+            .update({'isActive': false});
+      }
+    }
+    await firestore
+        .collection('Address')
+        .doc(data.addressID)
+        .update({'isActive': true});
+  }
 }

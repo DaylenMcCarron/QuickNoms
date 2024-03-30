@@ -6,6 +6,7 @@ import 'package:quicknoms/controller/provider/profileProvider/profileProvider.da
 import 'package:quicknoms/model/userModel.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
+import 'package:quicknoms/view/addressScreen/addressScreen.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -103,43 +104,43 @@ class _AccountScreenState extends State<AccountScreen> {
           SizedBox(
             height: 4.h,
           ),
-          // ListView.builder(
-          //     itemCount: account.length,
-          //     shrinkWrap: true,
-          //     physics: const NeverScrollableScrollPhysics(),
-          //     itemBuilder: (context, index) {
-          //       return ListTile(
-          //         onTap: () {
-          //           if(index == 0){
-          //              Navigator.push(
-          //               context,
-          //               PageTransition(
-          //                 child: const OrderHistoryScreen(),
-          //                 type: PageTransitionType.rightToLeft,
-          //               ),
-          //             );
-          //           }
-          //           if (index == 1) {
-          //             Navigator.push(
-          //               context,
-          //               PageTransition(
-          //                 child: const AddressScreen(),
-          //                 type: PageTransitionType.rightToLeft,
-          //               ),
-          //             );
-          //           }
-          //         },
-          //         leading: FaIcon(
-          //           account[index][0],
-          //           size: 2.h,
-          //           color: black,
-          //         ),
-          //         title: Text(
-          //           account[index][1],
-          //           style: AppTextStyles.body14,
-          //         ),
-          //       );
-          //     })
+          ListView.builder(
+              itemCount: account.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    // if(index == 0){
+                    //    Navigator.push(
+                    //     context,
+                    //     PageTransition(
+                    //       child: const OrderHistoryScreen(),
+                    //       type: PageTransitionType.rightToLeft,
+                    //     ),
+                    //   );
+                    // }
+                    if (index == 1) {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          child: const AddressScreen(),
+                          type: PageTransitionType.rightToLeft,
+                        ),
+                      );
+                    }
+                  },
+                  leading: FaIcon(
+                    account[index][0],
+                    size: 2.h,
+                    color: black,
+                  ),
+                  title: Text(
+                    account[index][1],
+                    style: AppTextStyles.body14,
+                  ),
+                );
+              })
         ],
       )),
     );

@@ -9,17 +9,23 @@ import 'package:provider/provider.dart';
 import 'package:quicknoms/constant/constant.dart';
 import 'package:quicknoms/controller/provider/restaurantProvider/restaurantProvider.dart';
 import 'package:quicknoms/controller/services/locationServices/locationServices.dart';
+import 'package:quicknoms/controller/services/userDataCRUDServices/userDataCRUDServices.dart';
 import 'package:quicknoms/model/foodModel.dart';
 import 'package:quicknoms/model/restaurantIDAndLocationModel.dart';
 import 'package:quicknoms/model/restaurantModel.dart';
+import 'package:quicknoms/model/userAddressModel.dart';
 
 class RestaurantServices {
   static getNearbyRestaurants(BuildContext context) async {
     //Geofire.initialize('Restaurants');
-    Position currentPosition = await LocationServices.getCurrentLocation();
+    // Position currentPosition = await LocationServices.getCurrentLocation();
+
+    UserAddressModel userActiveAddress =
+        await UserDataCRUDServices.fetchActiveAddress();
     GeoFirePoint center = geo.point(
-        latitude: currentPosition.latitude,
-        longitude: currentPosition.longitude);
+      latitude: userActiveAddress.latitude,
+      longitude: userActiveAddress.longitude,
+    );
 
     var collectionReference = firestore.collection('location');
     Stream<List<DocumentSnapshot>> stream = geo

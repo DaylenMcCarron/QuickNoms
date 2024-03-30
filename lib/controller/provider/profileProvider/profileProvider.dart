@@ -4,13 +4,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:quicknoms/controller/services/imageServices/imageServices.dart';
 import 'package:quicknoms/controller/services/userDataCRUDServices/userDataCRUDServices.dart';
+import 'package:quicknoms/model/userAddressModel.dart';
 import 'package:quicknoms/model/userModel.dart';
 
 class ProfileProvider extends ChangeNotifier {
   File? profileImage;
   String? profileImageURL;
   UserModel? userData;
-  // List<UserAddressModel> addresses = [];
+  List<UserAddressModel> addresses = [];
   // UserAddressModel? activeAddress;
 
   pickFoodImageFromGallery(BuildContext context) async {
@@ -37,15 +38,15 @@ class ProfileProvider extends ChangeNotifier {
     log(userData!.toMap().toString());
   }
 
-  // fetchUserAddresses() async {
-  //   addresses = await UserDataCRUDServices.fetchAddresses();
-  //   for (var address in addresses) {
-  //     if (address.isActive) {
-  //       activeAddress = address;
-  //     }
-  //   }
+  fetchUserAddresses() async {
+    addresses = await UserDataCRUDServices.fetchAddresses();
+    // for (var address in addresses) {
+    //   if (address.isActive) {
+    //     activeAddress = address;
+    //   }
+    // }
 
-  //   notifyListeners();
-  //   log(activeAddress!.toMap().toString());
-  // }
+    notifyListeners();
+    // log(activeAddress!.toMap().toString());
+  }
 }
