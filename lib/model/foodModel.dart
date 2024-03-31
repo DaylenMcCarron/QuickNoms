@@ -12,6 +12,9 @@ class FoodModel {
   bool isVegetarian;
   String actualPrice;
   String discountedPrice;
+  String? orderID;
+  int? quantity;
+  DateTime? addedToCartAt;
   FoodModel({
     required this.name,
     required this.restaurantUID,
@@ -22,6 +25,9 @@ class FoodModel {
     required this.isVegetarian,
     required this.actualPrice,
     required this.discountedPrice,
+    this.orderID,
+    this.quantity,
+    this.addedToCartAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +41,9 @@ class FoodModel {
       "isVegetarian": isVegetarian,
       "actualPrice": actualPrice,
       "discountedPrice": discountedPrice,
+      'orderID': orderID,
+      'quantity': quantity,
+      'addedToCartAt': addedToCartAt?.millisecondsSinceEpoch,
     };
   }
 
@@ -49,6 +58,11 @@ class FoodModel {
       isVegetarian: map['isVegetarian'] as bool,
       actualPrice: map['actualPrice'] as String,
       discountedPrice: map['discountedPrice'] as String,
+      orderID: map['orderID'] != null ? map['orderID'] as String : null,
+      quantity: map['quantity'] != null ? map['quantity'] as int : null,
+      addedToCartAt: map['addedToCartAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['addedToCartAt'] as int)
+          : null,
     );
   }
   String toJson() => json.encode(toMap());

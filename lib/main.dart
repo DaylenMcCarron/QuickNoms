@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:quicknoms/controller/provider/authProvider/authProvider.dart';
+import 'package:quicknoms/controller/provider/itemOrderProvider/itemOrderProvider.dart';
 import 'package:quicknoms/controller/provider/profileProvider/profileProvider.dart';
 import 'package:quicknoms/controller/provider/restaurantProvider/restaurantProvider.dart';
 import 'package:quicknoms/firebase_options.dart';
@@ -36,7 +37,9 @@ class QuickNoms extends StatelessWidget {
               ChangeNotifierProvider<RestaurantProvider>(
                   create: (_) => RestaurantProvider()),
               ChangeNotifierProvider<ProfileProvider>(
-                  create: (_) => ProfileProvider())
+                  create: (_) => ProfileProvider()),
+              ChangeNotifierProvider<ItemOrderProvider>(
+                  create: (_) => ItemOrderProvider())
             ],
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,

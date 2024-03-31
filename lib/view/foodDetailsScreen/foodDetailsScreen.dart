@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:quicknoms/constant/constant.dart';
+import 'package:quicknoms/controller/provider/itemOrderProvider/itemOrderProvider.dart';
+import 'package:quicknoms/controller/services/foodOrderServices/foodOrderServices.dart';
 import 'package:quicknoms/model/foodModel.dart';
 import 'package:quicknoms/utils/colors.dart';
 import 'package:quicknoms/utils/textStyles.dart';
 import 'package:quicknoms/widgets/commonElevatedButton.dart';
+import 'package:quicknoms/widgets/toastService.dart';
 import 'package:sizer/sizer.dart';
 
 class FoodDetailsScreen extends StatefulWidget {
@@ -195,33 +200,32 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             height: 4.h,
           ),
           CommonElevatedButton(
-            onPressed: () {},
-            // onPressed: () async {
-            //   if (quantity > 0) {
-            //     String foodID = uuid.v1();
-            //     FoodModel foodData = FoodModel(
-            //         name: widget.foodModel.name,
-            //         resturantUID: widget.foodModel.resturantUID,
-            //         uploadTime: widget.foodModel.uploadTime,
-            //         foodID: widget.foodModel.foodID,
-            //         description: widget.foodModel.description,
-            //         foodImageURL: widget.foodModel.foodImageURL,
-            //         isVegetrain: widget.foodModel.isVegetrain,
-            //         actualPrice: widget.foodModel.actualPrice,
-            //         discountedPrice: widget.foodModel.discountedPrice,
-            //         quantity: quantity,
-            //         orderID: foodID,
-            //         addedToCartAt: DateTime.now());
-            //     await FoodOrderServices.addItemToCart(foodData, context);
-            //     context.read<ItemOrderProvider>().fetchCartItems();
-            //   } else {
-            //     ToastService.sendScaffoldAlert(
-            //       msg: 'Select a valid Quantity ',
-            //       toastStatus: 'WARNING',
-            //       context: context,
-            //     );
-            //   }
-            // },
+            onPressed: () async {
+              if (quantity > 0) {
+                String foodID = uuid.v1();
+                FoodModel foodData = FoodModel(
+                    name: widget.foodModel.name,
+                    restaurantUID: widget.foodModel.restaurantUID,
+                    uploadTime: widget.foodModel.uploadTime,
+                    foodID: widget.foodModel.foodID,
+                    description: widget.foodModel.description,
+                    foodImageURL: widget.foodModel.foodImageURL,
+                    isVegetarian: widget.foodModel.isVegetarian,
+                    actualPrice: widget.foodModel.actualPrice,
+                    discountedPrice: widget.foodModel.discountedPrice,
+                    quantity: quantity,
+                    orderID: foodID,
+                    addedToCartAt: DateTime.now());
+                await FoodOrderServices.addItemToCart(foodData, context);
+                context.read<ItemOrderProvider>().fetchCartItems();
+              } else {
+                ToastService.sendScaffoldAlert(
+                  msg: 'Select a valid Quantity ',
+                  toastStatus: 'WARNING',
+                  context: context,
+                );
+              }
+            },
             color: white,
             child: Text(
               'Add to basket',
